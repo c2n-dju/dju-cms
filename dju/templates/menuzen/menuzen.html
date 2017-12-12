@@ -1,0 +1,43 @@
+{% load cms_tags sekizai_tags menu_tags dju_tags dju_menuzen_tags %}
+
+
+<ol class="mynav mybreadcrumb active" style="margin-left: 2px;">
+{% for ance in branch %}
+  <li>
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle {{ ance.attr.color }}" type="button" data-toggle="dropdown" data-hover="dropdown" data-delay="500">
+	{% if forloop.first %}
+	<span class="glyphicon glyphicon-home"></span>
+	  {% if ance.attr.childs|length > 0 %}
+          <span class="glyphicon glyphicon-mycaret mycaret mycaret-first"></span>
+          {% endif %}
+	{% else %}
+	{{ ance.attr.display }}
+	  {% if ance.attr.childs|length > 0 %}
+          <span class="glyphicon glyphicon-mycaret mycaret"></span>
+          {% endif %}
+	{% endif %}
+      </button>
+      {% if ance.attr.childs|length > 0 %}
+      <ul class="dropdown-menu">
+	<li><a class="{{ ance.attr.color }}" href="{{ ance.get_absolute_url }}">{{ ance.get_menu_title }} : présentation</a></li>
+	<li class="divider"></li>
+	{% for ch in ance.attr.childs %}
+	<li><a class="{{ ch.attr.color }}" href="{{ ch.get_absolute_url }}">{{ ch.get_menu_title }}</a></li>
+        {% endfor %}
+	{% comment %}
+	<li class="divider"></li>
+	<li><a href="http://www.lpn.cnrs.fr">Accueil site LPN</a></li>
+	<li><a href="http://www.onera.fr/">Accueil site ONERA</a></li>
+        {% endcomment %}
+      </ul>
+      {% endif %}
+    </div>
+  </li>
+  {% if forloop.first %}
+  <li>
+  <span class="bread-0">&nbsp;</span>
+  </li>
+  {% endif %}
+{% endfor %}
+</ol>

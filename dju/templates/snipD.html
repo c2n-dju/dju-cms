@@ -1,0 +1,25 @@
+{% load cms_tags sekizai_tags snippet_tags %}<!DOCTYPE html>
+<head>
+{% with HEAD2="HEAD-"|add:SITE_ACRONYME %}{% with HEAD1=HEAD2|add:"-D" %}
+<!-- SITE {{SITE_ACRONYME}} -->
+{% snippet_fragment HEAD1 or %}{% snippet_fragment HEAD2 or %}{% snippet_fragment "HEAD-standard-C2N" %}
+{% endsnippet_fragment %}{% endsnippet_fragment %}
+{% endwith %}{% endwith %}
+<!-- BEGIN css -->
+{% render_block "css" %}
+<!--   END css -->
+</head>
+<body {% with BODYATTR2="BODYATTR-"|add:SITE_ACRONYME %}{% with BODYATTR1=BODYATTR2|add:"-D" %}{% snippet_fragment BODYATTR1 or %}{% snippet_fragment BODYATTR2 or %}{% endsnippet_fragment %}{% endsnippet_fragment %}{% endwith %}{% endwith %}>
+{% cms_toolbar %}
+{% static_placeholder "Header D" site %}
+{% placeholder content %}
+{% static_placeholder "Footer D" site %}
+{% with SCRIPT2="SCRIPT-"|add:SITE_ACRONYME %}{% with SCRIPT1=SCRIPT2|add:"-D" %}
+{% snippet_fragment SCRIPT1 or %}{% snippet_fragment SCRIPT2 or %}{% snippet_fragment "SCRIPT-standard-C2N" %}
+{% endsnippet_fragment %}{% endsnippet_fragment %}
+{% endwith %}{% endwith %}
+<!-- BEGIN js -->
+{% render_block "js" %}
+<!--   END js -->
+</body>
+</html>
