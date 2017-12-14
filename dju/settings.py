@@ -30,7 +30,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-if "DJ_IN_PRODUCTION" in os.environ and os.environ["DJ_IN_PRODUCTION"] == "Y":
+if os.environ.get('DJ_IN_PRODUCTION', 'F') == 'Y':
     SECRET_KEY=os.environ["DJ_SECRET_KEY"]
     DEBUG=False
     ALLOWED_HOSTS = ["*"]
@@ -86,10 +86,7 @@ STATICFILES_DIRS = (
 )
 
 
-if 'SITE_ID' in os.environ:
-    SITE_ID = int(os.environ['SITE_ID'])
-else:
-    SITE_ID = 1
+SITE_ID = int(os.environ.get('SITE_ID', '1'))
 
 
 TEMPLATES = [
@@ -139,7 +136,7 @@ MIDDLEWARE_CLASSES += [
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware', # à la fin, appel en dernier recours
 ]
 
-if 'DJ_LOGIN_REQUIRED' in os.environ and os.environ['DJ_LOGIN_REQUIRED'] == 'Y':
+if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y':
     MIDDLEWARE_CLASSES += ['dju.middleware.LoginRequiredMiddleware',]
     # Cf. https://docs.djangoproject.com/fr/1.11/topics/auth/customizing/
     AUTHENTICATION_BACKENDS = [
@@ -205,24 +202,28 @@ INSTALLED_APPS = (
     'sekizai',
     'django_extensions',
     'django_cas_ng',
-    ### applications C2N ###
+    ### DJU Apps ###
     'dju',
     'djutags',
     'dju_cmstags',
-    'dju_semin.core',
-    'dju_semin.cms',
-    'dju_actu.core',
-    'dju_actu.cms',
     'dju_page_thumbnail',
     'dju_menuzen',
     'dju_sites',
     'dju_params',
-    ### deprecated C2N applications ###
-    # 'django_djusemin', # Ancienne application seulement conservée pour faciliter la migration
 )
+
+### Private Apps ###
+if os.environ.get('USE_PRIVATE_APPS', 'Y') == 'Y':
+    INSTALLED_APPS += (
+        'dju_semin.core',
+        'dju_semin.cms',
+        'dju_actu.core',
+        'dju_actu.cms',
+    )
 
 if DEBUG_TOOLBAR:
     INSTALLED_APPS += ('debug_toolbar',)
+
 
 LOCALE_PATHS = [
         DJU_DIR + "/locale",
