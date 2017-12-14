@@ -213,7 +213,7 @@ INSTALLED_APPS = (
 )
 
 ### Private Apps ###
-if os.environ.get('USE_PRIVATE_APPS', 'Y') == 'Y':
+if os.environ.get('USE_PRIVATE_STUFF', 'Y') == 'Y':
     INSTALLED_APPS += (
         'dju_semin.core',
         'dju_semin.cms',
@@ -265,27 +265,30 @@ CMS_TEMPLATES = (
     ('snipC.html', 'Snippets C'),
     ('snipD.html', 'Snippets D'),
     ('snipZ.html', 'Snippets Z'),
-    #
-    ('F_C2N_page_left-nav_10.html', 'F5 Nav(2) Content(10)'),
-    ('F_C2N_page_left-navigation_9.html', 'F5 Nav(3) Content(9)'),
-    ('F_C2N_12.html', 'F5 Content(12)'),
-    ('f6/content_12.html', 'F6 Content(12)'),
-    ('f6.4/content_12.html', 'F6.4 Content(12)'),
-    ('F_C2N_4_8.html', 'F5 Info(4) Content(8)'),
-    ('f6/info2_4-content_8.html', 'F6 Info(4) Content(8)'),
-    ('F_C2N_departement.html', 'F5-Departement'),
-    ('f6/equipe-content_12.html', 'F6-Equipe Content(12)'),
-    ('f6/departement.html', 'F6-Departement'),
-    ('F_C2N_formation.html', 'F5-Formation'),
-    ('F_C2N_plateforme.html', 'F5-Plateforme'),
-    #
-    ('utils/migrateur.html', 'Migrateur de placeholders'),
-    #
-    ('F_C2N_staff_ressources.html', 'F5-Staff-Ressources'),
-    #
-    ('f6/actu_8-semin_4.html', 'F6 Actu(8) Semin(4)'),
-    #
 )
+
+if os.environ.get('USE_PRIVATE_STUFF', 'Y') == 'Y':
+    CMS_TEMPLATES += (
+        ('F_C2N_page_left-nav_10.html', 'F5 Nav(2) Content(10)'),
+        ('F_C2N_page_left-navigation_9.html', 'F5 Nav(3) Content(9)'),
+        ('F_C2N_12.html', 'F5 Content(12)'),
+        ('f6/content_12.html', 'F6 Content(12)'),
+        ('f6.4/content_12.html', 'F6.4 Content(12)'),
+        ('F_C2N_4_8.html', 'F5 Info(4) Content(8)'),
+        ('f6/info2_4-content_8.html', 'F6 Info(4) Content(8)'),
+        ('F_C2N_departement.html', 'F5-Departement'),
+        ('f6/equipe-content_12.html', 'F6-Equipe Content(12)'),
+        ('f6/departement.html', 'F6-Departement'),
+        ('F_C2N_formation.html', 'F5-Formation'),
+        ('F_C2N_plateforme.html', 'F5-Plateforme'),
+        #
+        ('utils/migrateur.html', 'Migrateur de placeholders'),
+        #
+        ('F_C2N_staff_ressources.html', 'F5-Staff-Ressources'),
+        #
+        ('f6/actu_8-semin_4.html', 'F6 Actu(8) Semin(4)'),
+        #
+    )
 
 CMS_PERMISSION = True
 
