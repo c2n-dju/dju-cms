@@ -30,7 +30,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-if os.environ.get('DJ_IN_PRODUCTION', 'F') == 'Y':
+if os.environ.get('DJ_IN_PRODUCTION', 'N') == 'Y':
     SECRET_KEY=os.environ["DJ_SECRET_KEY"]
     DEBUG=False
     ALLOWED_HOSTS = ["*"]
@@ -152,7 +152,7 @@ if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y':
     CAS_APPLY_ATTRIBUTES_TO_USER = False
     CAS_CREATE_USER = True # A better way to give access to unregistred lab members have to be found 
     C2N_SAML_CONTROL = (os.environ['DJU_SAML_CONTROL_KEY'], os.environ['DJU_SAML_CONTROL_VALUE'])
-elif os.environ.get('DJ_IN_PRODUCTION', 'Y') == 'F':
+elif os.environ.get('DJ_IN_PRODUCTION', 'Y') == 'N':
     AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 else:
     AUTHENTICATION_BACKENDS = []
