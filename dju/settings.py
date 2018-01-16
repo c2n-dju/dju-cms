@@ -205,6 +205,8 @@ INSTALLED_APPS = (
     'sekizai',
     'django_extensions',
     'django_cas_ng',
+    ### Emencia apps, before others dju apps ###
+    'emencia_c2n',
     ### applications C2N ###
     'dju',
     'djutags',
@@ -259,6 +261,11 @@ CMS_LANGUAGES = {
 }
 
 CMS_TEMPLATES = (
+    ('emencia-c2n/pages/homepage.html', '(Emencia) Homepage'),
+    ('emencia-c2n/pages/page-model-1.html', '(Emencia) Page model 1'),
+    ('emencia-c2n/pages/page-model-2.html', '(Emencia) Page model 2'),
+    ('emencia-c2n/pages/page-model-3.html', '(Emencia) Page model 3'),
+    #
     ('snipA.html', 'Snippets A'),
     ('snipB.html', 'Snippets B'),
     ('snipC.html', 'Snippets C'),
@@ -465,3 +472,29 @@ if isHttps == "Y":
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 
+# Emencia
+
+CONTENTBRICK_KINDS = (
+    ('format-2-1-left', 'Bloc 2x1 (content to the left)'),
+    ('format-2-1-right', 'Bloc 2x1 (content to the right)'),
+    ('format-2-2', 'Bloc 2x2'),
+)
+
+# Used easy-thumbnail aliases names
+THUMBNAIL_ALIASES = {
+    '': {
+        # Following 'contentbrick' format names
+        'format-2-1-left': {
+            'size': (300, 300),
+            'crop': True
+        },
+        'format-2-1-right': {
+            'size': (300, 300),
+            'crop': True
+        },
+        'format-2-2': {
+            'size': (600, 600),
+            'crop': True
+        },
+    },
+}
