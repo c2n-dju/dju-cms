@@ -139,8 +139,10 @@ MIDDLEWARE_CLASSES += [
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware', # à la fin, appel en dernier recours
 ]
 
-if 'DJ_LOGIN_REQUIRED' in os.environ and os.environ['DJ_LOGIN_REQUIRED'] == 'Y':
+if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y':
     MIDDLEWARE_CLASSES += ['dju.middleware.LoginRequiredMiddleware',]
+
+if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y' or os.environ.get('DJ_LOGIN_POSSIBLE', 'N') == 'Y':
     # Cf. https://docs.djangoproject.com/fr/1.11/topics/auth/customizing/
     AUTHENTICATION_BACKENDS = [
         'django.contrib.auth.backends.ModelBackend',
@@ -155,9 +157,11 @@ if 'DJ_LOGIN_REQUIRED' in os.environ and os.environ['DJ_LOGIN_REQUIRED'] == 'Y':
     CAS_APPLY_ATTRIBUTES_TO_USER = False
     CAS_CREATE_USER = True # A better way to give access to unregistred lab members have to be found 
     C2N_SAML_CONTROL = (os.environ['DJU_SAML_CONTROL_KEY'], os.environ['DJU_SAML_CONTROL_VALUE'])
-else:
+else:    
     AUTHENTICATION_BACKENDS = []
-    
+
+print('AUTHENTICATION_BACKENDS = ' + str(AUTHENTICATION_BACKENDS))
+
     
 # Les applications prioritaires doivent venir en premier dans INSTALLED_APPS (la première définition a priorité)
 # Cf. https://docs.djangoproject.com/fr/1.11/ref/settings/#s-installed-apps
@@ -498,3 +502,11 @@ THUMBNAIL_ALIASES = {
         },
     },
 }
+
+DJANGOCMS_STYLE_CHOICES = ['intro-features', 'card-media-aside', 'centered-content', 'summaries', 'footer-hero']
+
+DJANGOCMS_STYLE_TEMPLATES = [
+    ('mydefault', 'My Default'),
+    ('feature', 'Feature'),
+]
+DJANGOCMS_STYLE_TAGS = ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
