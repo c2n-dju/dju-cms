@@ -160,7 +160,6 @@ if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y' or os.environ.get('DJ_LOGIN_P
 else:    
     AUTHENTICATION_BACKENDS = []
 
-print('AUTHENTICATION_BACKENDS = ' + str(AUTHENTICATION_BACKENDS))
 
     
 # Les applications prioritaires doivent venir en premier dans INSTALLED_APPS (la première définition a priorité)
