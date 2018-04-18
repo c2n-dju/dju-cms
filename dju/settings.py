@@ -221,6 +221,8 @@ if os.environ.get('USE_PRIVATE_STUFF', 'Y') == 'Y':
         'dju_semin.cms',
         'dju_actu.core',
         'dju_actu.cms',
+        'dju_job.core',
+        'dju_job.cms',
     )
 
 if DEBUG_TOOLBAR:
