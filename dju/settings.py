@@ -30,7 +30,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-if "DJ_IN_PRODUCTION" in os.environ and os.environ["DJ_IN_PRODUCTION"] == "Y":
+if os.environ.get('DJ_IN_PRODUCTION', 'N') == 'Y':
     SECRET_KEY=os.environ["DJ_SECRET_KEY"]
     DEBUG=False
     ALLOWED_HOSTS = ["*"]
@@ -86,10 +86,7 @@ STATICFILES_DIRS = (
 )
 
 
-if 'SITE_ID' in os.environ:
-    SITE_ID = int(os.environ['SITE_ID'])
-else:
-    SITE_ID = 1
+SITE_ID = int(os.environ.get('SITE_ID', '1'))
 
 
 TEMPLATES = [
@@ -157,7 +154,9 @@ if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y' or os.environ.get('DJ_LOGIN_P
     CAS_APPLY_ATTRIBUTES_TO_USER = False
     CAS_CREATE_USER = True # A better way to give access to unregistred lab members have to be found 
     C2N_SAML_CONTROL = (os.environ['DJU_SAML_CONTROL_KEY'], os.environ['DJU_SAML_CONTROL_VALUE'])
-else:    
+elif os.environ.get('DJ_IN_PRODUCTION', 'Y') == 'N':
+    AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
+else:
     AUTHENTICATION_BACKENDS = []
 
 
@@ -214,20 +213,26 @@ INSTALLED_APPS = (
     'dju',
     'djutags',
     'dju_cmstags',
-    'dju_semin.core',
-    'dju_semin.cms',
-    'dju_actu.core',
-    'dju_actu.cms',
     'dju_page_thumbnail',
     'dju_menuzen',
     'dju_sites',
     'dju_params',
-    ### deprecated C2N applications ###
-    # 'django_djusemin', # Ancienne application seulement conservée pour faciliter la migration
 )
+
+### Private Apps ###
+if os.environ.get('USE_PRIVATE_STUFF', 'Y') == 'Y':
+    INSTALLED_APPS += (
+        'dju_semin.core',
+        'dju_semin.cms',
+        'dju_actu.core',
+        'dju_actu.cms',
+        'dju_job.core',
+        'dju_job.cms',
+    )
 
 if DEBUG_TOOLBAR:
     INSTALLED_APPS += ('debug_toolbar',)
+
 
 LOCALE_PATHS = [
         DJU_DIR + "/locale",
@@ -263,6 +268,14 @@ CMS_LANGUAGES = {
     ],
 }
 
+# 'contentbrick' available brick formats
+CONTENTBRICK_KINDS = (
+    ('format-2-1-left', 'Bloc 2x1 (content to the left)'),
+    ('format-2-1-right', 'Bloc 2x1 (content to the right)'),
+    ('format-2-2', 'Bloc 2x2'),
+)
+
+
 CMS_TEMPLATES = (
     ('e/homepage.html', '(E) Homepage'),
     ('e/simple.html', '(E) Simple Page'),
@@ -278,27 +291,34 @@ CMS_TEMPLATES = (
     ('snipC.html', 'Snippets C'),
     ('snipD.html', 'Snippets D'),
     ('snipZ.html', 'Snippets Z'),
-    #
-    ('F_C2N_page_left-nav_10.html', 'F5 Nav(2) Content(10)'),
-    ('F_C2N_page_left-navigation_9.html', 'F5 Nav(3) Content(9)'),
-    ('F_C2N_12.html', 'F5 Content(12)'),
-    ('f6/content_12.html', 'F6 Content(12)'),
-    ('f6.4/content_12.html', 'F6.4 Content(12)'),
-    ('F_C2N_4_8.html', 'F5 Info(4) Content(8)'),
-    ('f6/info2_4-content_8.html', 'F6 Info(4) Content(8)'),
-    ('F_C2N_departement.html', 'F5-Departement'),
-    ('f6/equipe-content_12.html', 'F6-Equipe Content(12)'),
-    ('f6/departement.html', 'F6-Departement'),
-    ('F_C2N_formation.html', 'F5-Formation'),
-    ('F_C2N_plateforme.html', 'F5-Plateforme'),
-    #
-    ('utils/migrateur.html', 'Migrateur de placeholders'),
-    #
-    ('F_C2N_staff_ressources.html', 'F5-Staff-Ressources'),
-    #
-    ('f6/actu_8-semin_4.html', 'F6 Actu(8) Semin(4)'),
-    #
+    ('emencia-c2n/pages/homepage.html', '(Emencia) Homepage'),
+    ('emencia-c2n/pages/page-model-1.html', '(Emencia) Page model 1'),
+    ('emencia-c2n/pages/page-model-2.html', '(Emencia) Page model 2'),
+    ('emencia-c2n/pages/page-model-3.html', '(Emencia) Page model 3'),
 )
+
+if os.environ.get('USE_PRIVATE_STUFF', 'Y') == 'Y':
+    CMS_TEMPLATES += (
+        ('F_C2N_page_left-nav_10.html', 'F5 Nav(2) Content(10)'),
+        ('F_C2N_page_left-navigation_9.html', 'F5 Nav(3) Content(9)'),
+        ('F_C2N_12.html', 'F5 Content(12)'),
+        ('f6/content_12.html', 'F6 Content(12)'),
+        ('f6.4/content_12.html', 'F6.4 Content(12)'),
+        ('F_C2N_4_8.html', 'F5 Info(4) Content(8)'),
+        ('f6/info2_4-content_8.html', 'F6 Info(4) Content(8)'),
+        ('F_C2N_departement.html', 'F5-Departement'),
+        ('f6/equipe-content_12.html', 'F6-Equipe Content(12)'),
+        ('f6/departement.html', 'F6-Departement'),
+        ('F_C2N_formation.html', 'F5-Formation'),
+        ('F_C2N_plateforme.html', 'F5-Plateforme'),
+        #
+        ('utils/migrateur.html', 'Migrateur de placeholders'),
+        #
+        ('F_C2N_staff_ressources.html', 'F5-Staff-Ressources'),
+        #
+        ('f6/actu_8-semin_4.html', 'F6 Actu(8) Semin(4)'),
+        #
+    )
 
 CMS_PERMISSION = True
 
@@ -337,6 +357,26 @@ DATABASES = {
 }
 
 DATABASE_ROUTERS = ["dju.routers.DataRouter", ]
+
+# Used easy-thumbnail aliases names
+THUMBNAIL_ALIASES = {
+    '': {
+        # Following 'contentbrick' format names
+        'format-2-1-left': {
+            'size': (300, 300),
+            'crop': True
+        },
+        'format-2-1-right': {
+            'size': (300, 300),
+            'crop': True
+        },
+        'format-2-2': {
+            'size': (600, 600),
+            'crop': True
+        },
+    },
+}
+
 
 THUMBNAIL_HIGH_RESOLUTION = True
 
