@@ -205,6 +205,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'django_cas_ng',
     ### DJU Apps ###
+    'emencia_c2n',
     'dju',
     'djutags',
     'dju_cmstags',
@@ -263,12 +264,24 @@ CMS_LANGUAGES = {
     ],
 }
 
+# 'contentbrick' available brick formats
+CONTENTBRICK_KINDS = (
+    ('format-2-1-left', 'Bloc 2x1 (content to the left)'),
+    ('format-2-1-right', 'Bloc 2x1 (content to the right)'),
+    ('format-2-2', 'Bloc 2x2'),
+)
+
+
 CMS_TEMPLATES = (
     ('snipA.html', 'Snippets A'),
     ('snipB.html', 'Snippets B'),
     ('snipC.html', 'Snippets C'),
     ('snipD.html', 'Snippets D'),
     ('snipZ.html', 'Snippets Z'),
+    ('emencia-c2n/pages/homepage.html', '(Emencia) Homepage'),
+    ('emencia-c2n/pages/page-model-1.html', '(Emencia) Page model 1'),
+    ('emencia-c2n/pages/page-model-2.html', '(Emencia) Page model 2'),
+    ('emencia-c2n/pages/page-model-3.html', '(Emencia) Page model 3'),
 )
 
 if os.environ.get('USE_PRIVATE_STUFF', 'Y') == 'Y':
@@ -331,6 +344,26 @@ DATABASES = {
 }
 
 DATABASE_ROUTERS = ["dju.routers.DataRouter", ]
+
+# Used easy-thumbnail aliases names
+THUMBNAIL_ALIASES = {
+    '': {
+        # Following 'contentbrick' format names
+        'format-2-1-left': {
+            'size': (300, 300),
+            'crop': True
+        },
+        'format-2-1-right': {
+            'size': (300, 300),
+            'crop': True
+        },
+        'format-2-2': {
+            'size': (600, 600),
+            'crop': True
+        },
+    },
+}
+
 
 THUMBNAIL_HIGH_RESOLUTION = True
 
