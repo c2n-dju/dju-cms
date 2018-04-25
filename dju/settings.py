@@ -281,20 +281,16 @@ CMS_TEMPLATES = (
     ('e/simple.html', '(E) Simple Page'),
     ('e/standard.html', '(E) Standard Page'),
     #
-    ('emencia-c2n/pages/homepage.html', '(Emencia) Homepage'),
-    ('emencia-c2n/pages/page-model-1.html', '(Emencia) Page model 1'),
-    ('emencia-c2n/pages/page-model-2.html', '(Emencia) Page model 2'),
-    ('emencia-c2n/pages/page-model-3.html', '(Emencia) Page model 3'),
+    #('emencia-c2n/pages/homepage.html', '(Emencia) Homepage'),
+    #('emencia-c2n/pages/page-model-1.html', '(Emencia) Page model 1'),
+    #('emencia-c2n/pages/page-model-2.html', '(Emencia) Page model 2'),
+    #('emencia-c2n/pages/page-model-3.html', '(Emencia) Page model 3'),
     #
     ('snipA.html', 'Snippets A'),
     ('snipB.html', 'Snippets B'),
     ('snipC.html', 'Snippets C'),
     ('snipD.html', 'Snippets D'),
     ('snipZ.html', 'Snippets Z'),
-    ('emencia-c2n/pages/homepage.html', '(Emencia) Homepage'),
-    ('emencia-c2n/pages/page-model-1.html', '(Emencia) Page model 1'),
-    ('emencia-c2n/pages/page-model-2.html', '(Emencia) Page model 2'),
-    ('emencia-c2n/pages/page-model-3.html', '(Emencia) Page model 3'),
 )
 
 if os.environ.get('USE_PRIVATE_STUFF', 'Y') == 'Y':
