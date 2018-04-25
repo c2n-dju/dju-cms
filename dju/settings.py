@@ -277,14 +277,8 @@ CONTENTBRICK_KINDS = (
 
 
 CMS_TEMPLATES = (
-    ('e/homepage.html', '(E) Homepage'),
     ('e/simple.html', '(E) Simple Page'),
     ('e/standard.html', '(E) Standard Page'),
-    #
-    #('emencia-c2n/pages/homepage.html', '(Emencia) Homepage'),
-    #('emencia-c2n/pages/page-model-1.html', '(Emencia) Page model 1'),
-    #('emencia-c2n/pages/page-model-2.html', '(Emencia) Page model 2'),
-    #('emencia-c2n/pages/page-model-3.html', '(Emencia) Page model 3'),
     #
     ('snipA.html', 'Snippets A'),
     ('snipB.html', 'Snippets B'),
