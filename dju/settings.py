@@ -542,4 +542,4 @@ DJANGOCMS_STYLE_TEMPLATES = [
     ('mydefault', 'My Default'),
     ('feature', 'Feature'),
 ]
-DJANGOCMS_STYLE_TAGS = ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul',]
+DJANGOCMS_STYLE_TAGS = ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'a', 'p',]
