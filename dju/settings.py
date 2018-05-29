@@ -434,7 +434,7 @@ CKEDITOR_SETTINGS = {
         ['ShowBlocks', 'Source'],
         # semble inutile ['Maximize'],
     ],
-    'skin': 'moono',
+    'skin': 'moono-lisa',
     #'colorButton_colors': 'B22222,FFFFFF',
     #'extraPlugins': 'c2nicon,c2nlinkpeople,lineutils,clipboard,widget,c2nwidget',
 }
