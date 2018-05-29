@@ -173,6 +173,7 @@ INSTALLED_APPS = (
     'djangocms_admin_style', # add before 'django.contrib.admin'
     'djangocms_text_ckeditor',
     'djangocms_link',
+    'djangocms_link_manager',
     'djangocms_picture',
     'djangocms_file',
     'djangocms_snippet', # potential security risk /!\
