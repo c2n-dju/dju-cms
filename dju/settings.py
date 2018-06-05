@@ -434,7 +434,7 @@ CKEDITOR_SETTINGS = {
 
         # ?? ['Templates'],
         #[ 'c2nicon','c2nlinkpeople','c2nwidget'],
-        ['About', 'ShowBlocks', 'Source'],
+        ['ShowBlocks', 'Source', 'About',],
         # semble inutile ['Maximize'],
     ],
     'skin': 'moono-lisa',
