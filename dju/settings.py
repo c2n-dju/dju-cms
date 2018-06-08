@@ -547,4 +547,4 @@ DJANGOCMS_STYLE_TEMPLATES = [
 ]
 DJANGOCMS_STYLE_TAGS = ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'li', 'a', 'p',]
 
-MANAGERS = "web@c2n.upsaclay.fr"
+MANAGERS = ["web@c2n.upsaclay.fr", ]
