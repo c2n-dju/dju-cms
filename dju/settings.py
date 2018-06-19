@@ -32,7 +32,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 if os.environ.get('DJ_IN_PRODUCTION', 'N') == 'Y':
     SECRET_KEY=os.environ["DJ_SECRET_KEY"]
-    DEBUG=False
+    if os.environ.get('DJ_DEBUG', 'N') == 'Y':
+        DEBUG=True
+    else:
+        DEBUG=False
     ALLOWED_HOSTS = ["*"]
 else:
     # Quick-start development settings - unsuitable for production
