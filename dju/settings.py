@@ -56,6 +56,13 @@ else:
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
+if os.environ.get('DJ_EDITH', 'N') == 'Y':
+    CMS_CACHE_DURATIONS = {
+        'content': 0,
+        'menus': 0,
+        'permissions': 0,
+    }
+
 # Application definition
 
 ROOT_URLCONF = 'dju.urls'
