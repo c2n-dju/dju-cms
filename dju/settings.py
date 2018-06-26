@@ -292,6 +292,8 @@ CMS_TEMPLATES = (
     ('e/standard.html', '(E) Standard Page'),
     ('e/menu.html', '(E) Menu Page'),
     ('e/simple-s.html', '(E+s) Simple Page'),
+    ('e/standard-s.html', '(E+s) Standard Page'),
+    ('e/menu-s.html', '(E+s) Menu Page'),
     #
     ('snipA.html', 'Snippets A'),
     ('snipB.html', 'Snippets B'),
