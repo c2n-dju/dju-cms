@@ -290,6 +290,8 @@ CONTENTBRICK_KINDS = (
 CMS_TEMPLATES = (
     ('e/simple.html', '(E) Simple Page'),
     ('e/standard.html', '(E) Standard Page'),
+    ('e/menu.html', '(E) Menu Page'),
+    ('e/simple-s.html', '(E+s) Simple Page'),
     #
     ('snipA.html', 'Snippets A'),
     ('snipB.html', 'Snippets B'),
@@ -555,6 +557,6 @@ DJANGOCMS_STYLE_TEMPLATES = [
     ('mydefault', 'My Default'),
     ('feature', 'Feature'),
 ]
-DJANGOCMS_STYLE_TAGS = ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'li', 'a', 'p',]
+DJANGOCMS_STYLE_TAGS = ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'li', 'dl', 'dt', 'dd', 'a', 'p',]
 
 MANAGERS = ["web@c2n.upsaclay.fr", ]
