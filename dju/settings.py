@@ -562,3 +562,7 @@ DJANGOCMS_STYLE_TEMPLATES = [
 DJANGOCMS_STYLE_TAGS = ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'li', 'dl', 'dt', 'dd', 'a', 'p',]
 
 MANAGERS = ["web@c2n.upsaclay.fr", ]
+
+# Corrige le bug des fichiers de plus de 2621440 non accessibles par le serveur
+FILE_UPLOAD_PERMISSIONS=0o644
+FILE_UPLOAD_DIRECTORY_PERMISSIONS=0o755
