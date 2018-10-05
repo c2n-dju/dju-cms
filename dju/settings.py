@@ -410,7 +410,11 @@ CKEDITOR_SETTINGS = {
     'dataIndentationChars': '  ',
     #
     'fontSize_sizes': 'smaller;larger;xx-small;x-small;small;large;x-large;xx-large',
-    'stylesSet': [
+    'stylesSet': 'default:' + STATIC_URL + 'js/addons/ckeditor.wysiwyg.js',
+    'extraAllowedContent': [
+        'cms-plugin[*]',
+    ],
+    '_unused_stylesSet': [
         { 'name': 'strong (important)', 'element': 'strong' },
         { 'name': 'b (gras)', 'element': 'b' },
         { 'name': 'em (en évidence)', 'element': 'em' },
