@@ -153,17 +153,20 @@ if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y' or os.environ.get('DJ_LOGIN_P
     # Cf. https://docs.djangoproject.com/fr/1.11/topics/auth/customizing/
     AUTHENTICATION_BACKENDS = [
         'django.contrib.auth.backends.ModelBackend',
-        'dju.backends.DjuCASBackend',
     ]
+    if os.environ.get('DJ_EDITH', 'Y') == 'Y':
+        AUTHENTICATION_BACKENDS += [
+            'dju.backends.DjuCASBackend',
+        ]
 
-    CAS_SERVER_URL = os.environ['CAS_SERVER_URL']
-    CAS_ADMIN_PREFIX = 'admin'
-    LOGIN_URL = '/login/'
-    CAS_LOGOUT_COMPLETELY = True
-    CAS_VERSION = 'CAS_2_SAML_1_0'
-    CAS_APPLY_ATTRIBUTES_TO_USER = False
-    CAS_CREATE_USER = True # A better way to give access to unregistred lab members have to be found 
-    C2N_SAML_CONTROL = (os.environ['DJU_SAML_CONTROL_KEY'], os.environ['DJU_SAML_CONTROL_VALUE'])
+        CAS_SERVER_URL = os.environ['CAS_SERVER_URL']
+        CAS_ADMIN_PREFIX = 'admin'
+        LOGIN_URL = '/login/'
+        CAS_LOGOUT_COMPLETELY = True
+        CAS_VERSION = 'CAS_2_SAML_1_0'
+        CAS_APPLY_ATTRIBUTES_TO_USER = False
+        CAS_CREATE_USER = True # A better way to give access to unregistred lab members have to be found 
+        C2N_SAML_CONTROL = (os.environ['DJU_SAML_CONTROL_KEY'], os.environ['DJU_SAML_CONTROL_VALUE'])
 elif os.environ.get('DJ_IN_PRODUCTION', 'Y') == 'N':
     AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 else:
