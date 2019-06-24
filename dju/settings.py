@@ -163,7 +163,7 @@ if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y' or os.environ.get('DJ_LOGIN_P
         CAS_ADMIN_PREFIX = 'admin'
         LOGIN_URL = '/login/'
         CAS_LOGOUT_COMPLETELY = True
-        CAS_VERSION = 'CAS_2_SAML_1_0'
+        CAS_VERSION = '3'
         CAS_APPLY_ATTRIBUTES_TO_USER = False
         CAS_CREATE_USER = True # A better way to give access to unregistred lab members have to be found 
         C2N_SAML_CONTROL = (os.environ['DJU_SAML_CONTROL_KEY'], os.environ['DJU_SAML_CONTROL_VALUE'])
