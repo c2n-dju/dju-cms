@@ -186,7 +186,6 @@ INSTALLED_APPS = (
     'djangocms_admin_style', # add before 'django.contrib.admin'
     'djangocms_text_ckeditor',
     'djangocms_link',
-    'djangocms_link_manager',
     'djangocms_picture',
     'djangocms_file',
     'djangocms_snippet', # potential security risk /!\
@@ -200,6 +199,7 @@ INSTALLED_APPS = (
     #'cmsplugin_filer_image',
     #'cmsplugin_filer_teaser',
     #'cmsplugin_filer_video',
+    #'djangocms_link_manager',
     ### pour le sitemap ###
     'djangocms_page_sitemap',
     ### pour améliorer djangocms_text_ckeditor ###
