@@ -125,10 +125,10 @@ TEMPLATES = [
     },
 ]
 
-MIDDLEWARE_CLASSES = []
+MIDDLEWARE = []
 if DEBUG_TOOLBAR:
-    MIDDLEWARE_CLASSES += ['debug_toolbar.middleware.DebugToolbarMiddleware',]
-MIDDLEWARE_CLASSES += [
+    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware',]
+MIDDLEWARE += [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -147,7 +147,7 @@ MIDDLEWARE_CLASSES += [
 ]
 
 if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y':
-    MIDDLEWARE_CLASSES += ['dju.middleware.LoginRequiredMiddleware',]
+    MIDDLEWARE += ['dju.middleware.LoginRequiredMiddleware',]
 
 if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y' or os.environ.get('DJ_LOGIN_POSSIBLE', 'N') == 'Y':
     # Cf. https://docs.djangoproject.com/fr/1.11/topics/auth/customizing/
