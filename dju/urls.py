@@ -35,10 +35,9 @@ p_general = [
 
 p_i18n = i18n_patterns(
     url(r'^admin/', admin.site.urls),
-    #url(r'^login/$', auth_views.login, name='login'),
-    #url(r'^admin/logout/$', auth_views.logout, name='admin:logout'),
-    url(r'^login/$', django_cas_ng.views.login, name='cas_login'),
-    url(r'^logout/$', django_cas_ng.views.logout, name='logout'), # Il faut utiliser 'logout' pour alimenter le reverse de cms_toolbar.py
+    url(r'^login/$', django_cas_ng.views.LoginView.as_view(), name='cas_login'),
+    #url(r'^logout/$', django_cas_ng.views.logout, name='logout'), # Il faut utiliser 'logout' pour alimenter le reverse de cms_toolbar.py
+    url(r'^logout/$', django_cas_ng.views.LogoutView.as_view(), name='logout'), # Il faut utiliser 'logout' pour alimenter le reverse de cms_toolbar.py
     url(r'^prototypes/', include('emencia_c2n.prototypes_urls')),
     url(r'^', include('cms.urls')),
 )
