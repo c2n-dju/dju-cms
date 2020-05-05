@@ -149,6 +149,9 @@ MIDDLEWARE += [
 if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y':
     MIDDLEWARE += ['dju.middleware.LoginRequiredMiddleware',]
 
+# for Django-3.0, Cf. https://docs.djangoproject.com/en/3.0/ref/clickjacking/
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y' or os.environ.get('DJ_LOGIN_POSSIBLE', 'N') == 'Y':
     # Cf. https://docs.djangoproject.com/fr/1.11/topics/auth/customizing/
     AUTHENTICATION_BACKENDS = [
