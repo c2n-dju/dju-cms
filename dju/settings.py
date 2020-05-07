@@ -129,16 +129,18 @@ MIDDLEWARE = []
 if DEBUG_TOOLBAR:
     MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware',]
 MIDDLEWARE += [
-    'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'cms.middleware.utils.ApphookReloadMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware', # après 'django.contrib.sessions.middleware.SessionMiddleware'
-    'django.middleware.locale.LocaleMiddleware',
-#    'django.middleware.doc.XViewMiddleware',
-    'django.contrib.admindocs.middleware.XViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #
+    'cms.middleware.utils.ApphookReloadMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    # 'django.middleware.doc.XViewMiddleware',
+    'django.contrib.admindocs.middleware.XViewMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
@@ -146,8 +148,8 @@ MIDDLEWARE += [
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware', # à la fin, appel en dernier recours
 ]
 
-if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y':
-    MIDDLEWARE += ['dju.middleware.LoginRequiredMiddleware',]
+#if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y':
+#    MIDDLEWARE += ['dju.middleware.LoginRequiredMiddleware',]
 
 # for Django-3.0, Cf. https://docs.djangoproject.com/en/3.0/ref/clickjacking/
 X_FRAME_OPTIONS = 'SAMEORIGIN'
