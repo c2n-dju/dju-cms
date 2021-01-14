@@ -45,7 +45,7 @@ else:
     DEBUG = True
     #TEMPLATE_DEBUG = True
     ALLOWED_HOSTS = ["*"]
-    INTERNAL_IPS = ('0.0.0.0','127.0.0.1',)
+    INTERNAL_IPS = ('0.0.0.0','127.0.0.1','129.175.38.4')
 
 if DEBUG:
     DEBUG_TOOLBAR = True
@@ -163,7 +163,6 @@ if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y' or os.environ.get('DJ_LOGIN_P
         AUTHENTICATION_BACKENDS += [
             'dju.backends.DjuCASBackend',
         ]
-
         CAS_SERVER_URL = os.environ['CAS_SERVER_URL']
         CAS_ADMIN_PREFIX = 'admin'
         LOGIN_URL = '/login/'
