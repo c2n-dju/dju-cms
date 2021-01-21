@@ -170,7 +170,7 @@ if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y' or os.environ.get('DJ_LOGIN_P
         CAS_LOGOUT_COMPLETELY = True
         CAS_VERSION = '3'
         CAS_APPLY_ATTRIBUTES_TO_USER = False
-        CAS_CREATE_USER = True # A better way to give access to unregistred lab members have to be found 
+        CAS_CREATE_USER = True # A better way to give access to unregistred lab members have to be found
         C2N_SAML_CONTROL = (os.environ['DJU_SAML_CONTROL_KEY'], os.environ['DJU_SAML_CONTROL_VALUE'])
 elif os.environ.get('DJ_IN_PRODUCTION', 'Y') == 'N':
     AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
@@ -178,7 +178,7 @@ else:
     AUTHENTICATION_BACKENDS = []
 
 
-    
+
 # Les applications prioritaires doivent venir en premier dans INSTALLED_APPS (la première définition a priorité)
 # Cf. https://docs.djangoproject.com/fr/1.11/ref/settings/#s-installed-apps
 
@@ -247,6 +247,8 @@ if os.environ.get('USE_PRIVATE_STUFF', 'Y') == 'Y':
         'dju_actu.cms',
         'dju_job.core',
         'dju_job.cms',
+        'dju_ctu_eq.core',
+        'dju_ctu_eq.cms',
     )
 
 if DEBUG_TOOLBAR:
@@ -256,7 +258,7 @@ if DEBUG_TOOLBAR:
 LOCALE_PATHS = [
         DJU_DIR + "/locale",
     ]
-    
+
 LANGUAGES = (
     ('fr', gettext('fr')),
     ('en', gettext('en')),
@@ -341,12 +343,12 @@ CMS_PERMISSION = True
 try:
     base = os.environ['DJBASE']
 except KeyError:
-    print("-- Vous avez oublié : export DJBASE=base_XXXXX_XX") 
+    print("-- Vous avez oublié : export DJBASE=base_XXXXX_XX")
     exit(22)
 try:
     intrabase = os.environ['INTRABASE']
 except KeyError:
-    print("-- Vous avez oublié : export INTRABASE=base_XXXXX_XX") 
+    print("-- Vous avez oublié : export INTRABASE=base_XXXXX_XX")
     exit(22)
 
 
@@ -475,7 +477,7 @@ CMS_PLACEHOLDER_CONF = {
     },
     'content': {
         'plugins': ['StylePlugin', 'TextPlugin', 'LinkPlugin', 'PicturePlugin', 'FilePlugin',
-                    'VideoPlayerPlugin', 'FolderPlugin', 'ActuPluginPublisher', 'SeminPluginPublisher',],
+                    'VideoPlayerPlugin', 'FolderPlugin', 'ActuPluginPublisher', 'SeminPluginPublisher', 'PolePluginPublisher'],
         #'extra_context': {"width":640},
         'name': gettext("Content"),
         'language_fallback': True,
@@ -524,7 +526,7 @@ DJANGOCMS_SNIPPET_CACHE = False
 try:
     isHttps = os.environ['DJ_HTTPS']
 except KeyError:
-    print("-- Vous avez oublié : export DJHTTPS=true/false") 
+    print("-- Vous avez oublié : export DJHTTPS=true/false")
     exit(22)
 
 if isHttps == "Y":
