@@ -477,7 +477,7 @@ CMS_PLACEHOLDER_CONF = {
     },
     'content': {
         'plugins': ['StylePlugin', 'TextPlugin', 'LinkPlugin', 'PicturePlugin', 'FilePlugin',
-                    'VideoPlayerPlugin', 'FolderPlugin', 'ActuPluginPublisher', 'SeminPluginPublisher', 'PolePluginPublisher'],
+                    'VideoPlayerPlugin', 'FolderPlugin', 'ActuPluginPublisher', 'SeminPluginPublisher', 'PolePluginPublisher',],
         #'extra_context': {"width":640},
         'name': gettext("Content"),
         'language_fallback': True,
