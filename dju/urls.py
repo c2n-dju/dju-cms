@@ -8,6 +8,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 from django.conf import settings
 from django.http import HttpResponse
+from django.urls import path
 import django.contrib.sitemaps.views
 import django.views.static
 from djangocms_page_sitemap.sitemap import ExtendedSitemap
@@ -37,8 +38,8 @@ p_i18n = i18n_patterns(
     url(r'^admin/', admin.site.urls),
     #url(r'^login/$', auth_views.login, name='login'),
     #url(r'^admin/logout/$', auth_views.logout, name='admin:logout'),
-    url(r'^login/$', django_cas_ng.views.LoginView.as_view(), name='cas_login'),
-    url(r'^logout/$', django_cas_ng.views.LogoutView.as_view(), name='logout'), # Il faut utiliser 'logout' pour alimenter le reverse de cms_toolbar.py
+    path('login/', django_cas_ng.views.LoginView.as_view(), name='cas_login'),
+    path('logout/', django_cas_ng.views.LogoutView.as_view(), name='logout'), # Il faut utiliser 'logout' pour alimenter le reverse de cms_toolbar.py
     url(r'^prototypes/', include('emencia_c2n.prototypes_urls')),
     url(r'^', include('cms.urls')),
 )
