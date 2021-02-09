@@ -227,7 +227,7 @@ INSTALLED_APPS = (
     'dju',
     'djutags',
     'dju_cmstags',
-    'dju_page_thumbnail',
+    # plus utilisé, pas à jour: 'dju_page_thumbnail',
     'dju_menuzen',
     'dju_sites',
     'dju_params',
