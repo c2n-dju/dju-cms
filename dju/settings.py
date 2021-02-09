@@ -147,7 +147,10 @@ MIDDLEWARE += [
 ]
 
 if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y':
-    MIDDLEWARE += ['dju.middleware.LoginRequiredMiddleware',]
+    MIDDLEWARE += [
+        'django_cas_ng.middleware.CASMiddleware',
+        'dju.middleware.LoginRequiredMiddleware',
+    ]
 
 if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y' or os.environ.get('DJ_LOGIN_POSSIBLE', 'N') == 'Y':
     # Cf. https://docs.djangoproject.com/fr/1.11/topics/auth/customizing/
@@ -156,7 +159,8 @@ if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y' or os.environ.get('DJ_LOGIN_P
     ]
     if os.environ.get('DJ_EDITH', 'Y') == 'Y':
         AUTHENTICATION_BACKENDS += [
-            'dju.backends.DjuCASBackend',
+            # 'dju.backends.DjuCASBackend',
+            'django_cas_ng.backends.CASBackend',
         ]
 
         CAS_SERVER_URL = os.environ['CAS_SERVER_URL']

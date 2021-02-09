@@ -32,6 +32,8 @@ p_general = [
     url(r'^robots.txt$',
         lambda r: HttpResponse("User-agent: *\nSitemap: http://www.c2n.universite-paris-saclay.fr/sitemap.xml\nDisallow: /secret_zone\n", content_type="text/plain"),
         name="robots_file"),
+    #path('login/', django_cas_ng.views.LoginView.as_view(), name='cas_login'),
+    #path('logout/', django_cas_ng.views.LogoutView.as_view(), name='logout'), # Il faut utiliser 'logout' pour alimenter le reverse de cms_toolbar.py          
 ]
 
 p_i18n = i18n_patterns(
