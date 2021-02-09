@@ -125,10 +125,10 @@ TEMPLATES = [
     },
 ]
 
-MIDDLEWARE_CLASSES = []
+MIDDLEWARE = []
 if DEBUG_TOOLBAR:
-    MIDDLEWARE_CLASSES += ['debug_toolbar.middleware.DebugToolbarMiddleware',]
-MIDDLEWARE_CLASSES += [
+    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware',]
+MIDDLEWARE += [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -147,7 +147,7 @@ MIDDLEWARE_CLASSES += [
 ]
 
 if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y':
-    MIDDLEWARE_CLASSES += ['dju.middleware.LoginRequiredMiddleware',]
+    MIDDLEWARE += ['dju.middleware.LoginRequiredMiddleware',]
 
 if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y' or os.environ.get('DJ_LOGIN_POSSIBLE', 'N') == 'Y':
     # Cf. https://docs.djangoproject.com/fr/1.11/topics/auth/customizing/
@@ -186,7 +186,6 @@ INSTALLED_APPS = (
     'djangocms_admin_style', # add before 'django.contrib.admin'
     'djangocms_text_ckeditor',
     'djangocms_link',
-    'djangocms_link_manager',
     'djangocms_picture',
     'djangocms_file',
     'djangocms_snippet', # potential security risk /!\
@@ -200,6 +199,7 @@ INSTALLED_APPS = (
     #'cmsplugin_filer_image',
     #'cmsplugin_filer_teaser',
     #'cmsplugin_filer_video',
+    #'djangocms_link_manager',
     ### pour le sitemap ###
     'djangocms_page_sitemap',
     ### pour améliorer djangocms_text_ckeditor ###
