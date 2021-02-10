@@ -162,8 +162,8 @@ if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y':
     ]
     if os.environ.get('DJ_EDITH', 'Y') == 'Y':
         AUTHENTICATION_BACKENDS += [
-            # 'dju.backends.DjuCASBackend',
-            'django_cas_ng.backends.CASBackend',
+            'dju.backends.DjuCASBackend',
+            #'django_cas_ng.backends.CASBackend',
         ]
         CAS_SERVER_URL = os.environ['CAS_SERVER_URL']
         CAS_ADMIN_PREFIX = 'admin'
