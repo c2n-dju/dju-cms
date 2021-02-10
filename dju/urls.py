@@ -1,13 +1,14 @@
 from __future__ import print_function
 from cms.sitemaps import CMSSitemap
 from django.conf import settings
-from django.conf.urls import include, url
+# from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 from django.conf import settings
 from django.http import HttpResponse
+from django.urls import include, path, re_path
 import django.contrib.sitemaps.views
 import django.views.static
 from djangocms_page_sitemap.sitemap import ExtendedSitemap
@@ -18,32 +19,31 @@ from dju import views
 admin.autodiscover()
 
 p_general = [
-    url(r'^sitemap\.xml$',
+    path('sitemap.xml',
         django.contrib.sitemaps.views.sitemap,
         {'sitemaps': {'cmspages': ExtendedSitemap}},
         name='django.contrib.sitemaps.views.sitemap'
     ),
-    url(r'^detailed_sitemap\.xml$',
+    path('detailed_sitemap.xml',
         django.contrib.sitemaps.views.sitemap,
         {'sitemaps': {'cmspages': ExtendedSitemap}, 'template_name': 'detailed_sitemap.xml'},
         name='django.contrib.sitemaps.views.detailed_sitemap'
     ),
-    url(r'^robots.txt$',
+    path('robots.txt',
         lambda r: HttpResponse("User-agent: *\nSitemap: http://www.c2n.universite-paris-saclay.fr/sitemap.xml\nDisallow: /secret_zone\n", content_type="text/plain"),
         name="robots_file"),
 ]
 
 p_i18n = i18n_patterns(
-    url(r'^admin/', admin.site.urls),
-    url(r'^login/$', django_cas_ng.views.LoginView.as_view(), name='cas_login'),
-    #url(r'^logout/$', django_cas_ng.views.logout, name='logout'), # Il faut utiliser 'logout' pour alimenter le reverse de cms_toolbar.py
-    url(r'^logout/$', django_cas_ng.views.LogoutView.as_view(), name='logout'), # Il faut utiliser 'logout' pour alimenter le reverse de cms_toolbar.py
-    url(r'^prototypes/', include('emencia_c2n.prototypes_urls')),
-    url(r'^', include('cms.urls')),
+    path('admin/', admin.site.urls),
+    path('login/', django_cas_ng.views.LoginView.as_view(), name='cas_login'),
+    path('logout/', django_cas_ng.views.LogoutView.as_view(), name='logout'), # Il faut utiliser 'logout' pour alimenter le reverse de cms_toolbar.py
+    path('prototypes/', include('emencia_c2n.prototypes_urls')),
+    path('', include('cms.urls')),
 )
 
 p_show_media = [
-    url(r'^media/(?P<path>.*)$',
+    re_path(r'^media/(?P<path>.*)$',
         django.views.static.serve,
         {'document_root': settings.MEDIA_ROOT, 'show_indexes': True},
         name='django.views.static.serve'),
@@ -58,5 +58,5 @@ else:
 if settings.DEBUG_TOOLBAR:
     import debug_toolbar
     urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
+        path('__debug__/', include(debug_toolbar.urls)),
     ]

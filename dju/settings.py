@@ -85,7 +85,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static0005/'
+STATIC_URL = '/static0006/'
 MEDIA_URL = '/media/'
 # chemins statiques pour le serveur de production
 MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
@@ -148,20 +148,22 @@ MIDDLEWARE += [
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware', # à la fin, appel en dernier recours
 ]
 
-#if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y':
-#    MIDDLEWARE += ['dju.middleware.LoginRequiredMiddleware',]
-
 # for Django-3.0, Cf. https://docs.djangoproject.com/en/3.0/ref/clickjacking/
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y' or os.environ.get('DJ_LOGIN_POSSIBLE', 'N') == 'Y':
+if os.environ.get('DJ_LOGIN_REQUIRED', 'N') == 'Y':
+    MIDDLEWARE += [
+        'django_cas_ng.middleware.CASMiddleware',
+        'dju.middleware.LoginRequiredMiddleware',
+    ]
     # Cf. https://docs.djangoproject.com/fr/1.11/topics/auth/customizing/
     AUTHENTICATION_BACKENDS = [
         'django.contrib.auth.backends.ModelBackend',
     ]
     if os.environ.get('DJ_EDITH', 'Y') == 'Y':
         AUTHENTICATION_BACKENDS += [
-            'dju.backends.DjuCASBackend',
+            # 'dju.backends.DjuCASBackend',
+            'django_cas_ng.backends.CASBackend',
         ]
         CAS_SERVER_URL = os.environ['CAS_SERVER_URL']
         CAS_ADMIN_PREFIX = 'admin'
@@ -177,13 +179,13 @@ else:
     AUTHENTICATION_BACKENDS = []
 
 
-    
 # Les applications prioritaires doivent venir en premier dans INSTALLED_APPS (la première définition a priorité)
 # Cf. https://docs.djangoproject.com/fr/1.11/ref/settings/#s-installed-apps
 
 INSTALLED_APPS = (
     ### Entries for applications with plugins should come after cms ###
     'cms',
+    'menus',
     ### core addons ###
     ### Cf. https://www.django-cms.org/en/blog/2017/02/01/core-addons/
     'filer',
@@ -221,7 +223,6 @@ INSTALLED_APPS = (
     ### applications complémentaires django ###
     'easy_thumbnails',
     'treebeard',
-    'menus',
     'sekizai',
     'django_extensions',
     'django_cas_ng',

@@ -3,9 +3,9 @@ from django.conf import settings
 from django.utils.deprecation import MiddlewareMixin
 from re import compile
 
-EXEMPT_URLS = [compile('^(|fr/|en/)login'),
-               compile('^(|fr/|en/)logout'),
-               compile('^(|fr/|en/)admin'),
+EXEMPT_URLS = [compile('^/(|fr/|en/)login/'),
+               compile('^/(|fr/|en/)logout/'),
+               compile('^/(|fr/|en/)admin/'),
 ]
 
 if hasattr(settings, 'LOGIN_EXEMPT_URLS'):
@@ -21,6 +21,6 @@ class LoginRequiredMiddleware(MiddlewareMixin):
             "'django.contrib.auth.middleware.AuthenticationMiddleware'."
         )
         path = request.path
-        if request.user.is_authenticated:
+        if request.user.is_authenticated or any(url.match(path) for url in EXEMPT_URLS):
             return
         return HttpResponseRedirect(settings.LOGIN_URL)
