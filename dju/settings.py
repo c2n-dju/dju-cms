@@ -352,7 +352,7 @@ except KeyError:
 
 DATABASES = {
     'default': {
-        'CONN_MAX_AGE': None,
+        'CONN_MAX_AGE': 0,
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': base,
         'HOST': '',
@@ -361,7 +361,7 @@ DATABASES = {
         'PORT': '',
     },
     'dbcore': { # ex dbsemin, dbdata
-        'CONN_MAX_AGE': None,
+        'CONN_MAX_AGE': 0,
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': intrabase,
         'USER': '',
