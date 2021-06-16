@@ -247,7 +247,9 @@ if os.environ.get('USE_PRIVATE_STUFF', 'Y') == 'Y':
         'dju_actu.cms',
         'dju_job.core',
         'dju_job.cms',
-    )
+        'dju_ctu_eq.core',
+        'dju_ctu_eq.cms',
+        )
 
 if DEBUG_TOOLBAR:
     INSTALLED_APPS += ('debug_toolbar',)
